@@ -1,19 +1,17 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import Card from './Card';
 import CircleImage from './CircleImage';
 import Description from './Description';
 import TitleName from './TitleName';
 
-const PokemonNoDetail = () => {
-
-    const string = "Weight: 40\nBase Exp: 101\nNormal";
+const PokemonNoDetail = ({ imageURL, name }) => {
     return (
         <Card style={styles.cardWrapper}>
-            <CircleImage url="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/279.png" />
+            <CircleImage url={imageURL} />
             <View style={styles.content}>
-                <TitleName text="Pelipper" style={styles.title} />
-                {/* Button here */}
+                <TitleName text={name} style={styles.title} />
+                <Button title="Evolution Detail" />
             </View>
         </Card>
     );
@@ -28,6 +26,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
     },
     content: {
+        marginLeft: 10,
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
