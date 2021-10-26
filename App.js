@@ -14,12 +14,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { persistor, store } from './src/redux/store';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import Home from './src/screens/Home'
 
 const Stack = createNativeStackNavigator<StackParamList>();
-
-const Test = () => {
-    return <Text>Hello World!</Text>;
-};
 
 export default function App() {
     return (
@@ -28,7 +25,7 @@ export default function App() {
                 <SafeAreaProvider>
                     <NavigationContainer>
                         <Stack.Navigator>
-                            <Stack.Screen name="Test" component={Test} />
+                            <Stack.Screen name="Home" component={Home} />
                         </Stack.Navigator>
                     </NavigationContainer>
                 </SafeAreaProvider>
