@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+import Card from '../../components/Card';
+import PokemonNoDetail from '../../components/PokemonNoDetail';
 import { addExample } from '../../redux/reducer/example';
 
 export default function Home() {
@@ -9,10 +11,15 @@ export default function Home() {
     const dispatch = useDispatch();
     return (
         <View>
-            <Text>{example}</Text>
-            <Button title="add" onPress={() => dispatch(addExample())} />
+            <Card>
+                <Text>{example}</Text>
+                <Button title="add" onPress={() => dispatch(addExample())} />
+            </Card>
+            <PokemonNoDetail />
         </View>
     );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    
+});
