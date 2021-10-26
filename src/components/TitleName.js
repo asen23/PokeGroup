@@ -10,6 +10,7 @@ export default TitleName;
 const styles = StyleSheet.create({
     textStyle: {
         color: 'brown',
+        fontWeight: 'bold',
         fontSize: 25,
     },
 });
