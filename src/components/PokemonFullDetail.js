@@ -1,9 +1,7 @@
 import React from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
-import ButtonTransparent from './Button';
 import Card from './Card';
 import CircleImage from './CircleImage';
-import Description from './Description';
 import DetailColumn from './DetailColumn';
 import TitleName from './TitleName';
 

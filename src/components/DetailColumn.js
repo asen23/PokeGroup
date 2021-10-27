@@ -10,5 +10,6 @@ export default DetailColumn;
 const styles = StyleSheet.create({
     column: {
         marginVertical: 5,
+        color: 'grey',
     },
 });

@@ -1,8 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, View, Button } from 'react-native';
 import Card from './Card';
 import CircleImage from './CircleImage';
-import Description from './Description';
 import TitleName from './TitleName';
 
 const PokemonNoDetail = ({ imageURL, name }) => {
@@ -11,7 +10,7 @@ const PokemonNoDetail = ({ imageURL, name }) => {
             <CircleImage url={imageURL} />
             <View style={styles.content}>
                 <TitleName text={name} style={styles.title} />
-                <Button title="Evolution Detail" />
+                <View style={styles.button}><Button title="Evolution Detail"/></View>
             </View>
         </Card>
     );
@@ -29,9 +28,12 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center',
     },
     title: {
-        // marginBottom: 50,
+        marginBottom: 40,
     },
+    button: {
+        width: "80%",
+    }
+
 });
