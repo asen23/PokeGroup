@@ -4,13 +4,18 @@ import Card from './Card';
 import CircleImage from './CircleImage';
 import TitleName from './TitleName';
 
-const PokemonNoDetail = ({ imageURL, name }) => {
+const PokemonNoDetail = ({ pokemon, goToDetails }) => {
+
+    const evolutionDetailHandler = () => {
+        goToDetails();
+    }
+
     return (
         <Card style={styles.cardWrapper}>
-            <CircleImage url={imageURL} />
+            <CircleImage url={pokemon.imageURL} />
             <View style={styles.content}>
-                <TitleName text={name} style={styles.title} />
-                <View style={styles.button}><Button title="Evolution Detail"/></View>
+                <TitleName text={pokemon.name} style={styles.title} />
+                <View style={styles.button}><Button title="Evolution Detail" onPress={evolutionDetailHandler}/></View>
             </View>
         </Card>
     );

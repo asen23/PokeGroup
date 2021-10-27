@@ -7,7 +7,7 @@ import PokemonNoDetail from '../../components/PokemonNoDetail';
 import PokemonBasicDetail from '../../components/PokemonBasicDetail';
 import { addExample } from '../../redux/reducer/example';
 import PokemonFullDetail from '../../components/PokemonFullDetail';
-import Button from '../../components/Button'
+import Button from '../../components/Button';
 
 export default function Home() {
     const example = useSelector(state => state.example.example);
@@ -16,11 +16,20 @@ export default function Home() {
         <ScrollView>
             <Card>
                 <Text>{example}</Text>
-                <Button title="add" onPress={() => dispatch(addExample())} backgroundColor='red' textColor='white' />
+                <Button
+                    title="Get Pokeballs"
+                    onPress={() => dispatch(addExample())}
+                    backgroundColor="red"
+                    textColor="white"
+                />
             </Card>
             <PokemonNoDetail
-                imageURL="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/279.png"
-                name="Pelipper"
+                pokemon={{
+                    imageURL:
+                        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/279.png',
+                    name: 'Pelipper',
+                    id: 1,
+                }}
             />
             <PokemonFullDetail
                 imageURL="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/279.png"
