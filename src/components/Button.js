@@ -22,11 +22,11 @@ export default Button;
 const styles = StyleSheet.create({
     text: {
         fontWeight: 'bold',
-        fontSize: 20,
+        fontSize: 18,
         textAlign: 'center',
     },
     button: {
         borderRadius: 6,
-        padding: 18,
+        padding: 10,
     },
 });
