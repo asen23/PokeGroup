@@ -1,55 +1,79 @@
-import React from 'react';
-import { StyleSheet, Text, ScrollView } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import Card from '../../components/Card';
-import PokemonNoDetail from '../../components/PokemonNoDetail';
-import PokemonBasicDetail from '../../components/PokemonBasicDetail';
-import { addExample } from '../../redux/reducer/example';
-import PokemonFullDetail from '../../components/PokemonFullDetail';
 import Button from '../../components/Button';
 
-export default function Home() {
-    const example = useSelector(state => state.example.example);
-    const dispatch = useDispatch();
-    return (
-        <ScrollView>
-            <Card>
-                <Text>{example}</Text>
+export default function Home({ navigation }) {
+    const [pokeballCount, setPokeballCount] = useState(undefined);
+
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            setPokeballCount(undefined);
+        });
+
+        return unsubscribe;
+    }, [navigation]);
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: () => (
                 <Button
-                    title="Get Pokeballs"
-                    onPress={() => dispatch(addExample())}
+                    onPress={() =>
+                        navigation.navigate('Pokedex', {
+                            newPokemon: undefined,
+                        })
+                    }
+                    title="PS"
+                />
+            ),
+        });
+    }, [navigation]);
+
+    const getPokeballHandler = () => {
+        setPokeballCount(Math.floor(Math.random() * 10) + 1);
+    };
+
+    const openPokeballHandler = () => {
+        navigation.navigate('Pokeball', {
+            count: pokeballCount,
+        });
+    };
+
+    const PokeballDetail = ({ count }) => (
+        <View>
+            <Image
+                source={require('../../assets/pokeball.png')}
+                style={styles.image}
+            />
+            <Text>Congratulations, you get {count} pokeball's</Text>
+            <Text>Let's open it shall we ?</Text>
+        </View>
+    );
+
+    return (
+        <View>
+            <Card>
+                <Text>Hello There,</Text>
+                <Text>press the button below to get free pokeballs :D</Text>
+                {pokeballCount ? (
+                    <PokeballDetail count={pokeballCount} />
+                ) : null}
+                <Button
+                    title={pokeballCount ? 'Open Pokeballs' : 'Get Pokeballs'}
+                    onPress={
+                        pokeballCount ? openPokeballHandler : getPokeballHandler
+                    }
                     backgroundColor="red"
                     textColor="white"
                 />
             </Card>
-            <PokemonNoDetail
-                pokemon={{
-                    imageURL:
-                        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/279.png',
-                    name: 'Pelipper',
-                    id: 1,
-                }}
-            />
-            <PokemonFullDetail
-                imageURL="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/279.png"
-                pokemon={{
-                    name: 'Pelipper',
-                    weight: 40,
-                    type: ['normal'],
-                    abilities: ['limber', 'imposter'],
-                }}
-            />
-            <PokemonBasicDetail
-                imageURL="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/279.png"
-                pokemon={{
-                    name: 'Pelipper',
-                    weight: 40,
-                    type: ['normal'],
-                }}
-            />
-        </ScrollView>
+        </View>
     );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    image: {
+        height: '50%',
+        resizeMode: 'contain',
+    },
+});
