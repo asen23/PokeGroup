@@ -17,6 +17,7 @@ import Home from './src/screens/Home'
 import Evolutions from './src/screens/evolution';
 import Pokeball from './src/screens/Pokeball'
 import Pokedex from './src/screens/Pokedex'
+import EvolutionDetail from './src/screens/evolutiondetail';
 
 const Stack = createNativeStackNavigator();
 
@@ -29,6 +30,7 @@ export default function App() {
                         <Stack.Navigator>
                             <Stack.Screen name="Home" component={Home} />
                             <Stack.Screen name="Evolution" component={Evolutions} />
+                            <Stack.Screen name="Evolution Detail" component={EvolutionDetail} />
                             <Stack.Screen name="Pokeball" component={Pokeball} />
                             <Stack.Screen name="Pokedex" component={Pokedex} />
                         </Stack.Navigator>

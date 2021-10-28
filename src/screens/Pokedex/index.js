@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import React from 'react';
+import { Text, FlatList } from 'react-native';
 import { useSelector } from 'react-redux';
 import PokemonBasicDetail from '../../components/PokemonBasicDetail';
 
-const PokedexColumn = ({ item }) => {
-    return <PokemonBasicDetail id={item} />;
-};
-
-export default function Pokedex({ route }) {
+export default function Pokedex({ route, navigation }) {
     const { newPokemon } = route.params;
     const pokedex = useSelector(state => state.pokedex.pokedex);
 
@@ -18,6 +14,16 @@ export default function Pokedex({ route }) {
                 : 'P o k e  C o l l e c t i o n s'}
         </Text>
     );
+
+    const goToEvolutions = id => {
+        navigation.navigate('Evolution', {
+            id: id,
+        });
+    };
+
+    const PokedexColumn = ({ item }) => {
+        return <PokemonBasicDetail id={item} onPress={goToEvolutions} />;
+    };
 
     return (
         <FlatList

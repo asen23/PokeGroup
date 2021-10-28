@@ -6,7 +6,7 @@ import CircleImage from './CircleImage';
 import DetailColumn from './DetailColumn';
 import TitleName from './TitleName';
 
-const PokemonBasicDetail = ({ id }) => {
+const PokemonBasicDetail = ({ id, onPress }) => {
     const [pokemon, setPokemon] = useState({
         name: '',
         weight: '',
@@ -29,6 +29,11 @@ const PokemonBasicDetail = ({ id }) => {
     useEffect(() => {
         getPokemonData();
     }, []);
+
+    const goToEvolutionsHandler = () => {
+        onPress(id);
+    }
+
     return (
         <Card style={styles.cardWrapper}>
             <CircleImage url={imageURL} />
@@ -40,11 +45,7 @@ const PokemonBasicDetail = ({ id }) => {
                 <Button
                     title="Evolution"
                     textColor="blue"
-                    onPress={() =>
-                        navigation.navigate('Evolution', {
-                            evolutionURL: `https://pokeapi.co/api/v2/evolution-chain/${id}`,
-                        })
-                    }
+                    onPress={goToEvolutionsHandler}
                 />
             </View>
         </Card>

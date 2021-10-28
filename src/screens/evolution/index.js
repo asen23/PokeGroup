@@ -1,31 +1,34 @@
 import React, { useEffect } from 'react';
-import {
-    FlatList,
-    StyleSheet,
-    Text
-} from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import PokemonNoDetail from '../../components/PokemonNoDetail';
-import { setEvolutionChain } from '../../redux/reducer/evolution';
+import { setEvolutionChain, setLoading } from '../../redux/reducer/evolution';
 
 const Evolutions = ({ route, navigation }) => {
-
     const evolutions = useSelector(state => state.evolution);
     const dispatch = useDispatch();
 
-    // const { evolutionURL } = route.params;
-    const evolutionURL = 'https://pokeapi.co/api/v2/evolution-chain/2/';
+    const { id } = route.params;
 
     useEffect(() => {
+        dispatch(setLoading(true));
         getPokemonEvolutions();
     }, []);
 
+    const getEvolutionURL = async () => {
+        let response = await fetch(
+            `https://pokeapi.co/api/v2/pokemon-species/${id}`,
+        );
+        let json = await response.json();
+        return json.evolution_chain.url;
+    };
+
     const getPokemonEvolutions = async () => {
         try {
+            let evolutionURL = await getEvolutionURL();
             let response = await fetch(evolutionURL);
             let json = await response.json();
             setPokemonEvolutions(json.chain);
-
         } catch (error) {
             console.error(error);
         }
@@ -48,6 +51,7 @@ const Evolutions = ({ route, navigation }) => {
             } else flag = 0;
         } while (flag == 1);
         dispatch(setEvolutionChain(pokemons));
+        dispatch(setLoading(false));
     };
 
     const getImageUrl = async name => {
@@ -73,8 +77,8 @@ const Evolutions = ({ route, navigation }) => {
     };
 
     const renderItem = ({ item }) => {
-        const goToDetailsHandler = () => {
-            console.log('go to details');
+        const goToDetailsHandler = id => {
+            navigation.navigate('Evolution Detail', { id: id });
         };
 
         return (
@@ -82,17 +86,21 @@ const Evolutions = ({ route, navigation }) => {
         );
     };
 
-    const itemSeparator = () => (
-        <Text style={styles.center}>ᐯ</Text>
-    )
-
+    const itemSeparator = () => <Text style={styles.center}>ᐯ</Text>;
+    console.log(evolutions.loading);
     return (
-        <FlatList
-            data={evolutions.pokemons}
-            renderItem={renderItem}
-            ItemSeparatorComponent={itemSeparator}
-            keyExtractor={item => item.id}
-        />
+        <View>
+            {evolutions.loading ? (
+                <Text style={styles.center}>Loading...</Text>
+            ) : (
+                <FlatList
+                    data={evolutions.pokemons}
+                    renderItem={renderItem}
+                    ItemSeparatorComponent={itemSeparator}
+                    keyExtractor={item => item.id}
+                />
+            )}
+        </View>
     );
 };
 
@@ -103,5 +111,5 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         width: '100%',
         color: 'grey',
-    }
+    },
 });

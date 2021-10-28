@@ -7,7 +7,7 @@ import TitleName from './TitleName';
 const PokemonNoDetail = ({ pokemon, goToDetails }) => {
 
     const evolutionDetailHandler = () => {
-        goToDetails();
+        goToDetails(pokemon.id);
     }
 
     return (

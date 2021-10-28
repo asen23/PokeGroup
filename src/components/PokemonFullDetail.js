@@ -1,13 +1,9 @@
 import React from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Card from './Card';
 import CircleImage from './CircleImage';
 import DetailColumn from './DetailColumn';
 import TitleName from './TitleName';
-
-// const ListColumnChild = ({ item }) => (
-//     <DetailColumn>{`* ${item}`}</DetailColumn>
-// );
 
 const ListColumn = ({ title, list }) => (
     <View>
@@ -18,16 +14,15 @@ const ListColumn = ({ title, list }) => (
     </View>
 );
 
-const PokemonFullDetail = ({ imageURL, pokemon }) => {
+const PokemonFullDetail = ({ pokemon }) => {
     return (
         <Card style={styles.cardWrapper}>
-            <CircleImage url={imageURL} />
+            <CircleImage url={pokemon.imageURL} />
             <View style={styles.content}>
                 <TitleName text={pokemon.name} />
                 <DetailColumn>Weight: {pokemon.weight}</DetailColumn>
-                <DetailColumn>Base Exp: {pokemon.weight}</DetailColumn>
-                <DetailColumn>{pokemon.type}</DetailColumn>
-                <ListColumn title="Type:" list={pokemon.type} />
+                <DetailColumn>Height: {pokemon.height}</DetailColumn>
+                <ListColumn title="Type:" list={pokemon.types} />
                 <ListColumn title="Abilities:" list={pokemon.abilities} />
             </View>
         </Card>
@@ -45,6 +40,7 @@ const styles = StyleSheet.create({
     content: {
         flexDirection: 'column',
         justifyContent: 'center',
+        marginLeft: 5
     },
     column: {
         marginVertical: 5,
