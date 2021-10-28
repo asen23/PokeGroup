@@ -41,7 +41,9 @@ const PokemonBasicDetail = ({ id, onPress }) => {
                 <TitleName text={pokemon.name} style={styles.title} />
                 <DetailColumn>Weight: {pokemon.weight}</DetailColumn>
                 <DetailColumn>Base Exp: {pokemon.exp}</DetailColumn>
-                <DetailColumn>{pokemon.type}</DetailColumn>
+                {pokemon.type.map(type => (
+                    <DetailColumn key={type}>{type}</DetailColumn>
+                ))}
                 <Button
                     title="Evolution"
                     textColor="blue"
