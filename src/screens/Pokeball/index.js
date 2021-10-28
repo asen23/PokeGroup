@@ -67,22 +67,25 @@ export default function Pokeball({ navigation, route }) {
     }, []);
 
     return (
-        <View>
-            <ScrollView style={styles.listView}>
-                {pokemon.map(pokemon => (
-                    <PokemonCard
-                        id={pokemon}
-                        key={pokemon}
-                        style={styles.pokemonCard}
-                        onPress={() => setOpenPokeballCount(c => c + 1)}
-                    />
-                ))}
+        <View style={styles.wrapperView}>
+            <ScrollView>
+                <View style={styles.listView}>
+                    {pokemon.map(pokemon => (
+                        <PokemonCard
+                            id={pokemon}
+                            key={pokemon}
+                            style={styles.pokemonCard}
+                            onPress={() => setOpenPokeballCount(c => c + 1)}
+                        />
+                    ))}
+                </View>
+            </ScrollView>
+            <View style={styles.button}>
                 {openPokeballCount == count ? (
                     <Button
                         title="Save & View Pokedex"
                         textColor="white"
                         backgroundColor="blue"
-                        style={styles.button}
                         onPress={() => {
                             dispatch(addPokedex(pokemon));
                             navigation.replace('Pokedex', {
@@ -91,26 +94,33 @@ export default function Pokeball({ navigation, route }) {
                         }}
                     />
                 ) : null}
-            </ScrollView>
+            </View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
+    wrapperView: {
+        flex: 1,
+    },
     listView: {
+        flex: 1,
         flexDirection: 'row',
         flexWrap: 'wrap',
     },
     pokemonCard: {
         width: '50%',
+        marginVertical: 16,
     },
     image: {
         height: 125,
         width: 125,
+        resizeMode: 'contain',
+        alignSelf: 'center',
     },
     button: {
         position: 'absolute',
-        marginBottom: 8,
-        marginRight: 8,
+        right: 8,
+        bottom: 8,
     },
 });
