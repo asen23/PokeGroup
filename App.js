@@ -15,8 +15,10 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import Home from './src/screens/Home'
 import Evolutions from './src/screens/evolution';
+import Pokeball from './src/screens/Pokeball'
+import Pokedex from './src/screens/Pokedex'
 
-const Stack = createNativeStackNavigator<StackParamList>();
+const Stack = createNativeStackNavigator();
 
 export default function App() {
     return (
@@ -25,8 +27,10 @@ export default function App() {
                 <SafeAreaProvider>
                     <NavigationContainer>
                         <Stack.Navigator>
-                            <Stack.Screen name="Evolution" component={Evolutions} />
                             <Stack.Screen name="Home" component={Home} />
+                            <Stack.Screen name="Evolution" component={Evolutions} />
+                            <Stack.Screen name="Pokeball" component={Pokeball} />
+                            <Stack.Screen name="Pokedex" component={Pokedex} />
                         </Stack.Navigator>
                     </NavigationContainer>
                 </SafeAreaProvider>
