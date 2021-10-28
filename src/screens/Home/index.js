@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Card from '../../components/Card';
 import Button from '../../components/Button';
 
@@ -17,14 +17,15 @@ export default function Home({ navigation }) {
     useLayoutEffect(() => {
         navigation.setOptions({
             headerRight: () => (
-                <Button
+                <TouchableOpacity
                     onPress={() =>
                         navigation.navigate('Pokedex', {
                             newPokemon: undefined,
                         })
                     }
-                    title="PS"
-                />
+                    title="PS">
+                    <Image source={require('../../assets/menu.png')} />
+                </TouchableOpacity>
             ),
         });
     }, [navigation]);
