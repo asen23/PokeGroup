@@ -87,7 +87,7 @@ const Evolutions = ({ route, navigation }) => {
     };
 
     const itemSeparator = () => <Text style={styles.center}>ᐯ</Text>;
-    console.log(evolutions.loading);
+
     return (
         <View>
             {evolutions.loading ? (

@@ -1,18 +1,19 @@
 import React from 'react';
-import { Text, FlatList } from 'react-native';
+import { Text, FlatList, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
 import PokemonBasicDetail from '../../components/PokemonBasicDetail';
+import TitlePage from '../../components/TitlePage';
 
 export default function Pokedex({ route, navigation }) {
     const { newPokemon } = route.params;
     const pokedex = useSelector(state => state.pokedex.pokedex);
 
     const Header = () => (
-        <Text>
+        <TitlePage>
             {newPokemon
-                ? 'N e w  P o k e\n C o l l e c t i o n s'
-                : 'P o k e  C o l l e c t i o n s'}
-        </Text>
+                ? 'New Poke\nCollections'
+                : 'Poke Collections'}
+        </TitlePage>
     );
 
     const goToEvolutions = id => {
@@ -30,6 +31,8 @@ export default function Pokedex({ route, navigation }) {
             ListHeaderComponent={Header}
             data={newPokemon ? newPokemon : pokedex}
             renderItem={PokedexColumn}
+            numColumns={2}
         />
     );
 }
+

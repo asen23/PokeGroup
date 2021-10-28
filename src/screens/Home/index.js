@@ -40,40 +40,54 @@ export default function Home({ navigation }) {
     };
 
     const PokeballDetail = ({ count }) => (
-        <View>
+        <View style={styles.detail}>
             <Image
                 source={require('../../assets/pokeball.png')}
                 style={styles.image}
             />
-            <Text>Congratulations, you get {count} pokeball's</Text>
-            <Text>Let's open it shall we ?</Text>
+            <Text style={styles.text}>
+                Congratulations, you get {count} pokeball's
+            </Text>
+            <Text style={styles.text}>Let's open it shall we ?</Text>
         </View>
     );
 
     return (
-        <View>
-            <Card>
-                <Text>Hello There,</Text>
-                <Text>press the button below to get free pokeballs :D</Text>
-                {pokeballCount ? (
-                    <PokeballDetail count={pokeballCount} />
-                ) : null}
-                <Button
-                    title={pokeballCount ? 'Open Pokeballs' : 'Get Pokeballs'}
-                    onPress={
-                        pokeballCount ? openPokeballHandler : getPokeballHandler
-                    }
-                    backgroundColor="red"
-                    textColor="white"
-                />
-            </Card>
-        </View>
+        <Card>
+            <Text style={styles.greetings}>Hello There,</Text>
+            <Text style={styles.text}>
+                Press the button below to get free pokeballs :D
+            </Text>
+            {pokeballCount ? <PokeballDetail count={pokeballCount} /> : null}
+            <Button
+                title={pokeballCount ? 'Open Pokeballs' : 'Get Pokeballs'}
+                onPress={
+                    pokeballCount ? openPokeballHandler : getPokeballHandler
+                }
+                backgroundColor="red"
+                textColor="white"
+            />
+        </Card>
     );
 }
 
 const styles = StyleSheet.create({
     image: {
-        height: '50%',
+        height: 150,
         resizeMode: 'contain',
+        alignSelf: 'center',
+        marginVertical: 8,
+    },
+    greetings: {
+        color: 'grey',
+        fontWeight: 'bold',
+        textAlign: 'center',
+        fontSize: 25,
+    },
+    text: {
+        color: 'grey',
+        textAlign: 'center',
+        fontSize: 18,
+        marginVertical: 5,
     },
 });
