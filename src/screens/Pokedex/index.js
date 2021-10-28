@@ -31,7 +31,6 @@ export default function Pokedex({ route, navigation }) {
             ListHeaderComponent={Header}
             data={newPokemon ? newPokemon : pokedex}
             renderItem={PokedexColumn}
-            numColumns={2}
         />
     );
 }
